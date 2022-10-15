@@ -21,12 +21,46 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 class VigenereCipheringMachine {
   encrypt() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    if(arguments.length < 2 || typeof arguments[0] != 'string' || typeof arguments[1] != 'string')
+      throw new Error('Incorrect arguments!');
+    let str = arguments[0].toUpperCase();
+    let cript = arguments[1].toUpperCase();
+    let criptNew = '';
+    for(let i = 0, j = 0; i < str.length; i++) {
+      if (j >= cript.length) j = 0;
+      if ( /[A-Z]/.test(str[i]) ) {
+        let c = (str[i].charCodeAt(0) - 'A'.charCodeAt(0) + cript[j].charCodeAt(0) - 'A'.charCodeAt(0)) % 26;
+        c += 'A'.charCodeAt(0);
+        criptNew += String.fromCharCode(c);
+        j++;
+      }
+      else {
+        criptNew += str[i];
+        //j++;
+      }
+      //if(test(str[i]) != ' ')  j++;
+    }
+    return criptNew;
   }
   decrypt() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    if(arguments.length < 2 || typeof arguments[0] != 'string' || typeof arguments[1] != 'string')
+      throw new Error('Incorrect arguments!');
+    let str = arguments[0].toUpperCase();
+    let cript = arguments[1].toUpperCase();
+    let criptNew = '';
+    for(let i = 0, j = 0; i < str.length; i++) {
+      if (j >= cript.length) j = 0;
+      if ( /[A-Z]/.test(str[i]) ) {
+        let c = (str[i].charCodeAt(0) - cript[j].charCodeAt(0) + 26) % 26;
+        c += 'A'.charCodeAt(0);
+        criptNew += String.fromCharCode(c);
+        j++;
+      }
+      else {
+        criptNew += str[i];
+      }
+    }
+    return criptNew;
   }
 }
 
