@@ -20,6 +20,9 @@ const { NotImplementedError } = require('../extensions/index.js');
  * 
  */
 class VigenereCipheringMachine {
+  constructor (straight = true) {
+    this.straight = straight;
+  }
   encrypt() {
     if(arguments.length < 2 || typeof arguments[0] != 'string' || typeof arguments[1] != 'string')
       throw new Error('Incorrect arguments!');
@@ -40,7 +43,7 @@ class VigenereCipheringMachine {
       }
       //if(test(str[i]) != ' ')  j++;
     }
-    return criptNew;
+    return this.straight ? criptNew : criptNew.split('').reverse().join('');
   }
   decrypt() {
     if(arguments.length < 2 || typeof arguments[0] != 'string' || typeof arguments[1] != 'string')
@@ -60,7 +63,7 @@ class VigenereCipheringMachine {
         criptNew += str[i];
       }
     }
-    return criptNew;
+    return this.straight ? criptNew : criptNew.split('').reverse().join('');
   }
 }
 
