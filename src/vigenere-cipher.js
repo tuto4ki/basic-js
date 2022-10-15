@@ -39,9 +39,7 @@ class VigenereCipheringMachine {
       }
       else {
         criptNew += str[i];
-        //j++;
       }
-      //if(test(str[i]) != ' ')  j++;
     }
     return this.straight ? criptNew : criptNew.split('').reverse().join('');
   }
